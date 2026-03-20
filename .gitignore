@@ -198,3 +198,17 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Flutter
+app_ui/.dart_tool/
+app_ui/build/
+app_ui/.flutter-plugins
+app_ui/.flutter-plugins-dependencies
+app_ui/.packages
+app_ui/.pub-cache/
+app_ui/.pub/
+app_ui/pubspec.lock
+*.iml
+
+# macOS
+.DS_Store

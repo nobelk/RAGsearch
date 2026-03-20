@@ -1,6 +1,10 @@
 # RAGsearch
 
-A personal search assistant that lets you search your documents using RAG (Retrieval-Augmented Generation). Upload PDFs, and the app chunks, embeds, and indexes them in a vector database. Queries are semantically matched against your documents and answered by a local LLM.
+[![codecov](https://codecov.io/gh/nobelk/RAGsearch/branch/main/graph/badge.svg)](https://codecov.io/gh/nobelk/RAGsearch)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13%2B-blue.svg)](https://www.python.org/downloads/)
+
+A personal search assistant that lets you search your documents using RAG (Retrieval-Augmented Generation). PDFs are chunked, embedded, and indexed in a vector database via a CLI ingestion tool. Queries are semantically matched against your documents and answered by a local LLM.
 
 ## Requirements
 
@@ -78,17 +82,22 @@ make format-check  # Check only
 
 ## Configuration
 
-Models and behavior are configured in `config.yaml`. Environment variables take precedence:
+Models and behavior are configured in `config.yaml`. Environment variables take precedence over `config.yaml`, which takes precedence over hardcoded defaults:
 
 | Environment Variable        | Description                  | Default                       |
 |-----------------------------|------------------------------|-------------------------------|
-| `OLLAMA_BASE_URL`           | Ollama service URL           | `http://localhost:11434`      |
-| `QDRANT_URL`                | Qdrant service URL           | `http://localhost:6333`       |
 | `OLLAMA_EMBEDDING_MODEL`    | Embedding model              | `nomic-embed-text`            |
 | `OLLAMA_GENERATION_MODEL`   | Generation model             | `llama3.2`                    |
 | `OLLAMA_CLASSIFIER_MODEL`   | Query classifier model       | `llama3.2:1b`                 |
 | `APP_SYSTEM_PROMPT`         | Custom system prompt         | See `config.yaml`             |
 | `APP_CLASSIFIER_ENABLED`    | Enable/disable classifier    | `true`                        |
+
+Service URLs are configured via environment variables only (not in `config.yaml`):
+
+| Environment Variable        | Description                  | Default                       |
+|-----------------------------|------------------------------|-------------------------------|
+| `OLLAMA_BASE_URL`           | Ollama service URL           | `http://localhost:11434`      |
+| `QDRANT_URL`                | Qdrant service URL           | `http://localhost:6333`       |
 
 ## Deployment
 

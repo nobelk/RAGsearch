@@ -1,0 +1,10 @@
+embedding_model: nomic-embed-text
+generation_model: llama3.2
+system_prompt: >-
+  You are an expert assistant. Answer the user's question based
+  ONLY on the provided context below. Do not use any outside knowledge.
+  If the provided context is insufficient to answer the question,
+  say "I don't know based on the provided context."
+  Cite specific source identifiers when referencing documents.
+classifier_model: llama3.2:1b
+classifier_enabled: true

@@ -6,6 +6,8 @@ __pycache__/
 # environment variables
 .env
 
+.idea/
+
 
 # C extensions
 *.so

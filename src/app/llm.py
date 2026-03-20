@@ -50,8 +50,7 @@ def _build_context_prompt(chunks: list[dict]) -> str:
     parts = []
     for i, chunk in enumerate(chunks, start=1):
         header = (
-            f"[{i}] {chunk['section_id']} — "
-            f"{chunk['title']}. ({chunk['subpart']})"
+            f"[{i}] {chunk['section_id']} — " f"{chunk['title']}. ({chunk['subpart']})"
         )
         parts.append(f"{header}\n{chunk['text']}")
     return "\n\n".join(parts)

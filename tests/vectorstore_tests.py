@@ -136,9 +136,7 @@ class TestUpsertChunks:
 
     async def test_uses_document_prefix(self):
         chunks = [
-            DocumentChunk(
-                section_id="s1", title="Title", subpart="Part", text="Body"
-            ),
+            DocumentChunk(section_id="s1", title="Title", subpart="Part", text="Body"),
         ]
 
         captured_texts = []
@@ -177,9 +175,7 @@ class TestSearch:
         mock_qdrant.query_points = AsyncMock(return_value=mock_results)
 
         with patch("app.vectorstore.get_qdrant_client", return_value=mock_qdrant):
-            with patch(
-                "app.vectorstore.get_embeddings", return_value=[[0.1] * 768]
-            ):
+            with patch("app.vectorstore.get_embeddings", return_value=[[0.1] * 768]):
                 results = await search("test query")
                 assert len(results) == 1
                 assert results[0]["section_id"] == "s1"
@@ -194,9 +190,7 @@ class TestSearch:
             return [[0.1] * 768]
 
         mock_qdrant = AsyncMock()
-        mock_qdrant.query_points = AsyncMock(
-            return_value=MagicMock(points=[])
-        )
+        mock_qdrant.query_points = AsyncMock(return_value=MagicMock(points=[]))
 
         with patch("app.vectorstore.get_qdrant_client", return_value=mock_qdrant):
             with patch(

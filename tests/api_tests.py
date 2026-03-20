@@ -93,9 +93,7 @@ class TestSearchEndpoint:
                 new_callable=AsyncMock,
                 return_value="Answer",
             ):
-                await test_client.post(
-                    "/search", json={"query": "test", "limit": 10}
-                )
+                await test_client.post("/search", json={"query": "test", "limit": 10})
                 mock_search.assert_called_once_with("test", limit=10)
 
 
@@ -124,9 +122,7 @@ class TestSearchStreamEndpoint:
                 assert event_types[0] == "sources"
                 assert "done" in event_types
                 # Token events should be present
-                token_events = [
-                    e for e in events if e["event"] == "token"
-                ]
+                token_events = [e for e in events if e["event"] == "token"]
                 assert len(token_events) >= 1
 
     async def test_stream_empty_results(self, test_client):
@@ -144,8 +140,7 @@ class TestSearchStreamEndpoint:
             # Should have a token event with "No relevant documents"
             token_events = [e for e in events if e["event"] == "token"]
             assert any(
-                "No relevant documents" in e["data"]["content"]
-                for e in token_events
+                "No relevant documents" in e["data"]["content"] for e in token_events
             )
 
     async def test_stream_sources_first(self, test_client):
@@ -186,9 +181,7 @@ class TestHealthEndpoint:
             new_callable=AsyncMock,
             return_value=mock_qdrant,
         ):
-            with patch(
-                "app.api.httpx.AsyncClient", return_value=mock_http_client
-            ):
+            with patch("app.api.httpx.AsyncClient", return_value=mock_http_client):
                 response = await test_client.get("/health")
                 assert response.status_code == 200
                 data = response.json()
@@ -209,9 +202,7 @@ class TestHealthEndpoint:
             new_callable=AsyncMock,
             side_effect=Exception("Connection refused"),
         ):
-            with patch(
-                "app.api.httpx.AsyncClient", return_value=mock_http_client
-            ):
+            with patch("app.api.httpx.AsyncClient", return_value=mock_http_client):
                 response = await test_client.get("/health")
                 data = response.json()
                 assert data["status"] == "degraded"

@@ -43,12 +43,16 @@ def _parse_verdict(text: str) -> ClassificationResult:
     """
     match = _VERDICT_PATTERN.search(text)
     if not match:
-        return ClassificationResult(verdict="unknown", reason="parse_error", passed=True)
+        return ClassificationResult(
+            verdict="unknown", reason="parse_error", passed=True
+        )
 
     try:
         data = json.loads(match.group())
     except json.JSONDecodeError:
-        return ClassificationResult(verdict="unknown", reason="parse_error", passed=True)
+        return ClassificationResult(
+            verdict="unknown", reason="parse_error", passed=True
+        )
 
     verdict = data.get("verdict", "")
     reason = data.get("reason", "")

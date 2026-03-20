@@ -11,7 +11,6 @@ from app.llm import (
     generate_rag_answer_stream,
 )
 
-
 SAMPLE_CHUNKS = [
     {
         "section_id": "s1",
@@ -141,12 +140,8 @@ class TestGenerateRagAnswer:
 
         with patch("app.llm.CLASSIFIER_ENABLED", True):
             with patch("app.llm.classify_query", mock_classify):
-                with patch(
-                    "app.llm.httpx.AsyncClient", return_value=mock_client
-                ):
-                    result = await generate_rag_answer(
-                        "What is DNS?", SAMPLE_CHUNKS
-                    )
+                with patch("app.llm.httpx.AsyncClient", return_value=mock_client):
+                    result = await generate_rag_answer("What is DNS?", SAMPLE_CHUNKS)
                     assert result == "DNS stands for Domain Name System."
 
     async def test_classifier_disabled(self):
@@ -163,9 +158,7 @@ class TestGenerateRagAnswer:
 
         with patch("app.llm.CLASSIFIER_ENABLED", False):
             with patch("app.llm.httpx.AsyncClient", return_value=mock_client):
-                result = await generate_rag_answer(
-                    "What is DNS?", SAMPLE_CHUNKS
-                )
+                result = await generate_rag_answer("What is DNS?", SAMPLE_CHUNKS)
                 assert result == "Answer without classifier."
 
 
@@ -219,9 +212,7 @@ class TestGenerateRagAnswerStream:
 
         with patch("app.llm.CLASSIFIER_ENABLED", True):
             with patch("app.llm.classify_query", mock_classify):
-                with patch(
-                    "app.llm.httpx.AsyncClient", return_value=mock_client
-                ):
+                with patch("app.llm.httpx.AsyncClient", return_value=mock_client):
                     tokens = []
                     async for token in generate_rag_answer_stream(
                         "What is DNS?", SAMPLE_CHUNKS

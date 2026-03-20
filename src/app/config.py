@@ -71,6 +71,4 @@ EMBEDDING_MODEL: str = _resolve("embedding_model", "OLLAMA_EMBEDDING_MODEL")
 GENERATION_MODEL: str = _resolve("generation_model", "OLLAMA_GENERATION_MODEL")
 SYSTEM_PROMPT: str = _resolve("system_prompt", "APP_SYSTEM_PROMPT")
 CLASSIFIER_MODEL: str = _resolve("classifier_model", "OLLAMA_CLASSIFIER_MODEL")
-CLASSIFIER_ENABLED: bool = _resolve_bool(
-    "classifier_enabled", "APP_CLASSIFIER_ENABLED"
-)
+CLASSIFIER_ENABLED: bool = _resolve_bool("classifier_enabled", "APP_CLASSIFIER_ENABLED")

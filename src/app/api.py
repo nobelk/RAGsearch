@@ -87,13 +87,9 @@ def create_app() -> FastAPI:
                 )
 
             model = request.model or cfg.GENERATION_MODEL
-            answer = await llm.generate_rag_answer(
-                request.query, chunks, model=model
-            )
+            answer = await llm.generate_rag_answer(request.query, chunks, model=model)
             sources = [SearchResult(**chunk) for chunk in chunks]
-            return SearchResponse(
-                answer=answer, sources=sources, query=request.query
-            )
+            return SearchResponse(answer=answer, sources=sources, query=request.query)
         except Exception:
             logger.exception("Search request failed")
             raise HTTPException(status_code=500, detail="Internal server error")
@@ -163,9 +159,7 @@ def create_app() -> FastAPI:
 
         ollama_ok = False
         try:
-            async with httpx.AsyncClient(
-                base_url=ollama_url, timeout=5.0
-            ) as client:
+            async with httpx.AsyncClient(base_url=ollama_url, timeout=5.0) as client:
                 resp = await client.get("/")
                 resp.raise_for_status()
                 ollama_ok = True

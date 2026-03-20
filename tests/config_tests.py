@@ -63,15 +63,11 @@ class TestResolveBool:
             with patch("app.config._load_yaml_config", return_value={}):
                 from app.config import _resolve_bool
 
-                result = _resolve_bool(
-                    "classifier_enabled", "APP_CLASSIFIER_ENABLED"
-                )
+                result = _resolve_bool("classifier_enabled", "APP_CLASSIFIER_ENABLED")
                 assert result is True
 
     def test_env_false(self):
-        with patch.dict(
-            os.environ, {"APP_CLASSIFIER_ENABLED": "false"}, clear=False
-        ):
+        with patch.dict(os.environ, {"APP_CLASSIFIER_ENABLED": "false"}, clear=False):
             from app.config import _resolve_bool
 
             result = _resolve_bool("classifier_enabled", "APP_CLASSIFIER_ENABLED")
@@ -81,12 +77,8 @@ class TestResolveBool:
         from app.config import _resolve_bool
 
         for value in ("true", "1", "yes", "TRUE", "Yes"):
-            with patch.dict(
-                os.environ, {"APP_CLASSIFIER_ENABLED": value}, clear=False
-            ):
-                result = _resolve_bool(
-                    "classifier_enabled", "APP_CLASSIFIER_ENABLED"
-                )
+            with patch.dict(os.environ, {"APP_CLASSIFIER_ENABLED": value}, clear=False):
+                result = _resolve_bool("classifier_enabled", "APP_CLASSIFIER_ENABLED")
                 assert result is True, f"Expected True for env={value!r}"
 
     def test_yaml_bool_native(self):
@@ -97,9 +89,7 @@ class TestResolveBool:
             ):
                 from app.config import _resolve_bool
 
-                result = _resolve_bool(
-                    "classifier_enabled", "APP_CLASSIFIER_ENABLED"
-                )
+                result = _resolve_bool("classifier_enabled", "APP_CLASSIFIER_ENABLED")
                 assert result is False
 
     def test_yaml_string_bool(self):
@@ -110,9 +100,7 @@ class TestResolveBool:
             ):
                 from app.config import _resolve_bool
 
-                result = _resolve_bool(
-                    "classifier_enabled", "APP_CLASSIFIER_ENABLED"
-                )
+                result = _resolve_bool("classifier_enabled", "APP_CLASSIFIER_ENABLED")
                 assert result is False
 
 

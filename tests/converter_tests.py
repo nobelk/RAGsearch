@@ -27,7 +27,9 @@ class TestExtractTextFromPdf:
     async def test_extracts_text(self, tmp_path):
         pdf_path = tmp_path / "test.pdf"
         pdf_path.write_bytes(b"dummy")
-        with patch("app.text.converter.pymupdf4llm.to_markdown", return_value="# Hello\nWorld"):
+        with patch(
+            "app.text.converter.pymupdf4llm.to_markdown", return_value="# Hello\nWorld"
+        ):
             result = await extract_text_from_pdf(pdf_path)
             assert result == "# Hello\nWorld"
 

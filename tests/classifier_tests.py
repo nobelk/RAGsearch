@@ -70,9 +70,7 @@ class TestParseVerdict:
 class TestClassifyQuery:
     async def test_on_topic_query(self):
         response_json = {
-            "message": {
-                "content": '{"verdict": "on_topic", "reason": "Relevant"}'
-            }
+            "message": {"content": '{"verdict": "on_topic", "reason": "Relevant"}'}
         }
         mock_response = MagicMock()
         mock_response.json.return_value = response_json
@@ -90,9 +88,7 @@ class TestClassifyQuery:
 
     async def test_adversarial_query(self):
         response_json = {
-            "message": {
-                "content": '{"verdict": "adversarial", "reason": "Jailbreak"}'
-            }
+            "message": {"content": '{"verdict": "adversarial", "reason": "Jailbreak"}'}
         }
         mock_response = MagicMock()
         mock_response.json.return_value = response_json
